@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+   <head th:fragment="headerFragement">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>用户登录</title>
+
+    <!-- Bootstrap -->
+    <!--  
+    <link href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+	-->
+	<link href="../static/plugins/bootstrap/css/bootstrap.css" th:href="@{/plugins/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+	<link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.css" rel="stylesheet">
+    <link href="../static/app/css/login.css" th:href="@{/app/css/login.css}" rel="stylesheet" type="text/css">
+    
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        body{background: url("../images/4.jpg") no-repeat;background-size:cover;font-size:16px;}  
+       .form{background: rgba(255,255,255,0.2);width:600px;height:300px;margin:100px auto;}
+       #frm_login{display:block;}
+       .fa{display: inline-block;top:27px;left:6px;position:relative;color:#ccc;}
+       input[type="text"],input[type="password"]{padding-left:26px;}
+       .checkbox{padding-left:21px;}
+    </style>
+  </head>
+  <body>
+    
+  	<div  class="container">
+   	    <div class="form">
+            <div id="logo" class="row">
+	  	       <div class="col-md-3">
+	  	           <img src="../images/chinasofti.jpg" width="102" height="59">
+	  	       </div>
+	  	       <div class="col-md-8">
+	  	           <h3>中软国际客户满意度调查系统</h3>
+	  	       </div>
+  	       </div>
+  	        
+  	       <div class="row">
+  	       <form class="form-horizontal" id="frm_login" method=post action="/login">
+ 	           <div class="col-md-6 col-md-offset-4">
+ 	           <span class="alert" style="color:red;"th:text="${message}"> </span>  
+  	           </div> 
+  	           <div class="col-md-6 col-md-offset-4">
+  	           
+  	             <div class="form-group">
+  	                <i class="fa fa-user fa-lg"></i>
+  	                <input class="form-control" type="text" placeholder="用户名" name="username" 
+  	                       id="username" autofocus="autofocus" maxlength="20"/>
+  	             </div>
+  	             
+  	             <div class="form-group">
+  	                 <i class="fa fa-lock fa-lg"></i>
+  	                 <input class="form-control" type="password" placeholder="密码" name="password"
+  	                    id="password" maxlength="8"/>
+  	             </div>
+  	            <!--  
+  	             <div class="from-group">
+  	                <label class="checkbox">
+  	                    <input type="checkbox" name="login_remember" value="1">Remember me
+  	                </label>
+  	             </div>
+  	           -->
+  	             <div class="form-group" style="margin-top:20px;">
+  	               
+  	               <input type="submit" name="login_submit" id="login_submit" class="btn btn-primary btn-lg pull-right" value="登录"/>
+  	               
+  	             </div>
+  	          
+  	           </div>
+  	          
+  	       </form>
+  	       </div>
+  	      
+  	    </div>
+  	
+  	
+  	</div>
+   
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="../static/plugins/bootstrap/js/jquery.min.js"  th:src="@{/plugins/bootstrap/js/jquery.min.js}" type="text/javascript"></script>
+	<script src="../static/plugins/bootstrap/js/bootstrap.js" th:src="@{/plugins/bootstrap/js/bootstrap.js}" type="text/javascript"></script>	
+    <script src="../static/app/js/login.js" th:src="@{/app/js/login.js}" type="text/javascript"></script>
+  </body>
+</html>

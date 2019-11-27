@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+   <head th:fragment="headerFragement">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>中软国际TPG客户满意度调查问卷(人力外包)</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link href="../static/plugins/bootstrap/css/bootstrap.css" th:href="@{/plugins/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+	 
+	<link href="../static/plugins/bootstrap-validator/css/bootstrapValidator.css" th:href="@{/plugins/bootstrap-validator/css/bootstrapValidator.css}" rel="stylesheet"/>
+    <link href="../static/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" th:href="@{/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css}" rel="stylesheet"/>
+	
+    <link href="../static/plugins/toastr/css/toastr.css" th:href="@{/plugins/toastr/css/toastr.css}" rel="stylesheet"/>
+    <link href="../static/app/css/survey.css"  th:href="@{/app/css/survey.css}" rel="stylesheet" type="text/css">
+    
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+     
+  </head>
+  <body class="g_survey">
+  <div class=g_container>
+    <div class="container survey_main"  >
+    	<div id="logo" class="row">
+	  	       <div class="col-md-3">
+	  	           <img src="../images/chinasofti.jpg" width="102" height="59">
+	  	       </div>
+	  	       <div class="col-md-8">
+	  	           <h3>中软国际TPG客户满意度调查问卷(人力外包)</h3>
+	  	       </div>
+  	    </div>
+    
+        <div class="row" style="margin-top: 60px;">    
+        <!-- form: -->
+        <section>
+          <div class="col-lg-8 col-lg-offset-2">  
+          <!--  
+           <span class="alert" th:text="${message}"> </span> 
+          --> 
+          <form role="form" id="fm_quesLaborCh">
+             
+            <input type="hidden" name="lob" id="lob" th:value="${user.lob}">
+            <input type="hidden" name="surveytype" id="surveytype" th:value="${user.surveytype}">
+            <input type="hidden" name="custName"  id="custName" th:value="${user.custname}">
+            <input type="hidden" name="evalPersonDep"  id="evalPersonDep" th:value="${user.evalPersonDep}">
+            <input type="hidden" name="evalPersonName"  id="evalPersonName" th:value="${user.evalPersonName}">
+            <input type="hidden" id="evalDate" name = "evalDate"  >
+            
+            <!--  
+            <div class="form-group">
+              <label>客户名称</label>
+              <span class="required" title="必答题" aria-label="必答题" >*</span>
+              <div class="description">
+                <div class="description-text"></div>
+              </div>
+              <input type="text" class="form-control" id="custName" name="custName" th:value="${user.custname}"    placeholder="">
+              <div class="help-block with-errors"></div>
+            </div>
+
+            <div class="form-group">
+              <label >评价人部门</label>
+              <span class="required" title="必答题" aria-label="必答题" alt="必答题" >*</span>
+              <div class="description">
+                <div class="description-text"></div>
+                 
+              </div>
+              <input type="text" class="form-control" id="evalPersonDep" name="evalPersonDep" th:value="${user.evalPersonDep}" placeholder="">
+              <div class="help-block with-errors"></div>
+            </div>
+
+            <div class="form-group">
+              <label>评价人姓名</label>
+              <span class="required" title="必答题" aria-label="必答题" alt="必答题" >*</span>
+              <div class="description">
+                <div class="description-text"></div>
+                 
+              </div>
+              <input type="text" class="form-control" id="evalPersonName" name="evalPersonName" th:value="${user.evalPersonName}"  placeholder="">
+              <div class="help-block with-errors"></div>
+            </div>
+
+            <div class="form-group">
+              <label>调查日期</label>
+              <span class="required" title="必答题" aria-label="必答题" alt="必答题" >*</span>
+              <div class="description">
+                <div class="description-text"></div>
+                 
+              </div>
+               
+              <input class="form-control" size="16" type="text" id="evalDate" name = "evalDate" value="" >
+             
+              <div class="help-block with-errors"></div>
+            </div>
+            -->
+            <div class="form-group">
+              <label>一、综合评价</label>
+              
+              <div class="description">
+                <div class="description-text"></div>
+                 
+              </div>
+              <div class="help-block with-errors"></div>
+            </div>
+
+
+            <div class="form-group">
+              <label>1. 您愿不愿意把本公司继续推荐给其他部门或项目组？</label>
+              <span class="required" title="必答题" aria-label="必答题" alt="必答题" >*</span>
+              <div class="description">
+                <div class="description_text">
+                  <p style="color:#008080;">(说明：评分范围0~10分，其中10表示非常愿意，5表示中立，而0表示非常不愿意。该评分仅反映您对被调查对象的满意程度，不是真的要去推荐)</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-1">
+                  <label>
+                  <input type="radio" name="comprehensiveEval1" id="comprehensiveEval11" value="1"> 1
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval12" value="2"> 2
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval13" value="3"> 3
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                  <input type="radio" name="comprehensiveEval1" id="comprehensiveEval14" value="4"> 4
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval15" value="5"> 5
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval16" value="6"> 6
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                  <input type="radio" name="comprehensiveEval1" id="comprehensiveEval17" value="7"> 7
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval18" value="8"> 8
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval19" value="9"> 9
+                  </label>
+                </div>
+                <div class="col-lg-1">
+                   <label class="radio-inline">
+                    <input type="radio" name="comprehensiveEval1" id="comprehensiveEval20" value="10"> 10
+                  </label>
+                </div>
+            </div> <!--row -->
+            <div class="help-block with-errors"></div>
+            </div> <!--form-group -->
+
+            <div class="form-group">
+              <label>2. 您给出这个分数的主要原因是什么（选填）？</label>
+              <div class="description">
+                <div class="description_text">
+                  <p style="color:#008080;">（例如提交质量、实施进度、管理能力、人员技能、人员稳定度、招聘、工作态度、及时响应等，哪些方面您满意，哪些方面不满意）</p>
+                </div>
+              </div>  
+              <textarea class="form-control" id="comprehensiveEval1Reason" name="comprehensiveEval1Reason" rows="3"></textarea>
+               <p class="help-block with-errors"></p>
+            </div>
+
+            <div class="form-group">
+              <label for="InvestigationPerson">二、专项评价</label>
+              
+              <div class="description">
+                <div class="description-text"></div>
+                 
+              </div>
+               <div class="help-block with-errors"></div>
+            </div>
+
+            <div class="form-group">
+              <label>1. 质量意识</label>
+              <div class="description">
+                <div class="description_text">
+                  <p style="color:#008080;">注：以下调查项不涉及的，可以免填。每项得分为5分，5-非常满意/4-较满意/3-正常/2-较不满意/1-非常不满意</p>
+                </div>
+              </div> 
+              <div class="table_scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="sub_title"> </th> 
+                    <th>
+                      <div>非常不满意</div>
+                    </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th>
+                      <div>非常满意</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>1.1 员工是否具备良好的质量意识？</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval11" id="specialEval111"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval11" id="specialEval112"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval11" id=specialEval113   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval11" id="specialEval114"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval11" id="specialEval115"   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>1.2 员工是否遵循客户流程规范/制度要求/信息安全规定等？</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval12" id="specialEval121"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval12" id="specialEval122"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval12" id="specialEval123"   value="2">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval12" id="specialEval124"   value="2">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval12" id="specialEval125"   value="2">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>  
+              </div>
+            </div> <!-- form-group -->
+            <div class="form-group">
+              <div class="title"> 具体问题描述或建议项：</div>
+              <div class="description">
+                <div class="description_text"></div>
+             </div>  
+              <input type="text" class="form-control" id="specialEval1Detail" name="specialEval1Detail" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="customerFullName">2. 沟通管理</label>
+              <div class="description">
+                <div class="description_text">
+                  <p style="color:#008080;">注：以下调查项不涉及的，可以免填。每项得分为5分，5-非常满意/4-较满意/3-正常/2-较不满意/1-非常不满意</p>
+                </div>
+              </div>  
+             <div class="table_scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="sub_title"> </th> 
+                    <th>
+                      <div>非常不满意</div>
+                    </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th>
+                      <div>非常满意</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>2.1 各类报告、会议是否表达清晰、准时参加？</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval21" id="specialEval211"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval21" id="specialEval212"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval21" id="specialEval213"   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval21" id="specialEval214"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval21" id="specialEval215"   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>2.2 客户沟通是否顺畅，客户声音是否及时闭环？</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval22" id="specialEval221"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval22" id="specialEval222"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval22" id="specialEval223"   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval22" id="specialEval224"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval22" id="specialEval225"   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+            </div>
+            <div class="form-group">
+              <div class="title" > 具体问题描述或建议项：</div>
+              <div class="description" style="margin-left:10px;">
+                <div class="description_text"></div>
+             </div>  
+              <input type="text" class="form-control" id="specialEval2Detail" name="specialEval2Detail"   placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="customerFullName">3. 人员管理</label>
+              <div class="description">
+                <div class="description_text">
+                  <p style="color:#008080;">注：以下调查项不涉及的，可以免填。每项得分为5分，5-非常满意/4-较满意/3-正常/2-较不满意/1-非常不满意</p>
+                </div>
+              </div>  
+              <div class="table_scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="sub_title"> </th> 
+                    <th>
+                      <div>非常不满意</div>
+                    </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th>
+                      <div>非常满意</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>3.1 人员的工作态度、职业素养是否符合客户预期?</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval31" id="specialEval311"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval31" id="specialEval312"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval31" id="specialEval313"   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval31" id="specialEval314"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval31" id=specialEval315   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>3.2 人员是否及时到位，人员是否保持基本稳定?</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval32" id="specialEval321"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval32" id="specialEval322"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval32" id="specialEval323"   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval32" id="specialEval324"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval32" id="specialEval325"   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>  
+              </div> <!-- table-scroll -->
+            </div> <!-- from-group -->
+            <div class="form-group">
+              <div class="title" > 具体问题描述或建议项：</div>
+              <div class="description" style="margin-left:10px;">
+                <div class="description_text"></div>
+             </div>  
+              <input type="text" class="form-control" id="specialEval3Detail" name="specialEval3Detail" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="customerFullName">4. 技能能力</label>
+              <div class="description">
+                <div class="description_text">
+                  <p style="color:#008080;">注：以下调查项不涉及的，可以免填。每项得分为5分，5-非常满意/4-较满意/3-正常/2-较不满意/1-非常不满意</p>
+                </div>
+              </div>  
+              <div class="table_scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="sub_title"> </th> 
+                    <th>
+                      <div>非常不满意</div>
+                    </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th>
+                      <div>非常满意</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>4.1 软/硬件技术能力，以及行业理解是否满足客户要求？</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval41" id="specialEval411"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval41" id="specialEval412"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval41" id="specialEval413"   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval41" id="specialEval414"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval41" id="specialEval415"   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="sub_title">
+                      <div>
+                         <p>4.2 是否主动开展员工技能培训，主动提升员工的技能？</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input  type="radio" name="specialEval42" id="specialEval421"  value="1">1
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                        <label>
+                          <input type="radio" name="specialEval42" id="specialEval422"   value="2">2
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                         <label>
+                            <input type="radio" name="specialEval42" id="specialEval423"   value="3">3
+                            </label>
+                      </div>
+                    </td> 
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval42" id="specialEval424"   value="4">4
+                       </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="matrix_option">
+                       <label>
+                          <input type="radio" name="specialEval42" id="specialEval425"   value="5">5
+                       </label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>  
+              </div> <!-- table-scroll -->
+            </div> <!-- from-group -->
+            <div class="form-group">
+              <div class="title" > 具体问题描述或建议项：</div>
+              <div class="description" style="margin-left:10px;">
+                <div class="description_text"></div>
+             </div>  
+              <input type="text" class="form-control" id="specialEval4Detail" name="specialEval4Detail" placeholder="">
+            </div>
+                        <div class="form-group">
+              <label for="customerFullName">5. 表现比较突出的员工及其事迹</label>
+               
+              <div class="description">
+                <div class="description-text"></div>
+              </div>
+              <input type="text" class="form-control" id="specialEval5" name="specialEval5" placeholder="" >
+              <div class="help-block with-errors"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="customerFullName">6. 请反馈您其它的意见和建议</label>
+               
+              <div class="description">
+                <div class="description-text"></div>
+              </div>
+              <input type="text" class="form-control" id="specialEval6" name="specialEval6" placeholder="" >
+              <div class="help-block with-errors"></div>
+            </div>
+
+            <div class="form-group text-center" style="margin-top:40px;">
+              <button type="button" id="quesLaborCh_add" class="btn btn-primary btn-lg">提交</button>
+           </div>
+          </form>
+       </div> <!--col-lg-8 -->
+    </section>
+    <!-- :form -->
+    </div> <!--row -->
+    
+
+    </div> <!--containter-->
+   
+    
+
+
+    <br> <br>
+    <div th:fragment="footer-content">
+      <footer class="footer text-center">
+            &copy;2019 Chinasoftisoftware 
+      </footer>
+    </div>
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+   	<script src="../static/plugins/bootstrap/js/jquery.min.js"  th:src="@{/plugins/bootstrap/js/jquery.min.js}" type="text/javascript"></script>
+	<script src="../static/plugins/bootstrap/js/bootstrap.js" th:src="@{/plugins/bootstrap/js/bootstrap.js}" type="text/javascript"></script>
+	  
+	<script src="../static/plugins/bootstrap-validator/js/bootstrapValidator.js" th:src="@{/plugins/bootstrap-validator/js/bootstrapValidator.js}" type="text/javascript"></script>
+	<script src="../static/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}" type="text/javascript"></script>
+	<script src="../static/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js" th:src="@{/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js}" type="text/javascript"></script>  
+	<script src="../static/plugins/toastr/js/toastr.min.js" th:src="@{/plugins/toastr/js/toastr.min.js}" type="text/javascript"></script>		
+    
+    <script src="../statcic/app/js/questionnaireLaborCh.js" th:src="@{/app/js/questionnaireLaborCh.js}" type="text/javascript"></script>
+     
+    <!-- 加载Bootstrap-selecct -->
+    <!--  
+    <script src="./plugin/bootstrap-select/bootstrap-select.js"></script>
+    <script src="./plugin/bootstrap-select/defaults-zh_CN.js"></script>
+    
+    -->
+    </div>
+    
+    <script type="text/javascript">
+         toastr.options.positionClass = 'toast-bottom-right';
+         
+	</script>
+  </body>
+</html>

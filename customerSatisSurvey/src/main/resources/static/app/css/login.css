@@ -1,0 +1,50 @@
+ .main {
+    position: absolute;
+    width: 800px;
+    height: 300px;
+    
+    margin:100px auto; 
+    z-index: 1;
+    background: rgba(255,255,255,0.2); 
+}
+
+.form1 {
+    border: 0;
+    margin-right: 155px;
+    margin-top: 87px;
+    float: right;
+    width: 249px;
+    height: 41px;
+    background-color: #dbede9;
+    cursor: text;
+    color: #31ac90;
+    font-size: 14px;
+    text-indent: 10px;
+    vertical-align: middle;
+    line-height: 41px;
+}
+
+.form2 {
+    border: 0;
+    margin-right: 155px;
+    margin-top: 17px;
+    float: right;
+    width: 249px;
+    height: 41px;
+    background-color: #dbede9;
+    color: #31ac90;
+    font-size: 14px;
+    text-indent: 10px;
+    vertical-align: middle;
+    line-height: 41px;
+}
+
+
+#logo {
+    position: relative;
+    z-index: 2;
+    left: 26px;
+    top: 11px;
+}
+
+ 

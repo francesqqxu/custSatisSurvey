@@ -1,0 +1,15 @@
+/**
+ * 
+ */
+
+$(function(){
+    
+	$('#nextPage').click(function(){
+		
+	});
+	
+	
+	
+});
+
+

@@ -1,0 +1,58 @@
+buildscript {
+  repositories {
+  maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+  }
+  dependencies {
+  classpath 'org.springframework.boot:spring-boot-gradle-plugin'
+  }
+}
+
+
+
+plugins {
+	id 'org.springframework.boot' version '2.1.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+jar {
+  baseName="custSatisSurvey"
+}
+group = 'com.chinasofti'
+version = '0.1'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	
+	all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
+repositories {
+	maven {url "http://maven.aliyun.com/nexus/content/groups/public/"}
+    mavenLocal()
+    mavenCentral()
+	 
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web' 
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly  'mysql:mysql-connector-java'
+	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	
+	implementation'org.apache.poi:poi:4.1.0'
+	
+	implementation 'org.apache.poi:poi-ooxml:4.1.0'
+	
+}

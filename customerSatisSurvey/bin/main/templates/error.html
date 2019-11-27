@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Oops!</title>
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+</head>
+
+<body> 
+   <div class="errorPage">
+     <span class="oops">Oops</span>
+     <img th:src="@{/app/images/MissingPage.png}"></img>
+     <p>There seems to be a problem with the page you requested
+       (<span th:text="${path}"></span>).</p>
+     <p th:text="${'Details: ' + message}"></p>
+      <a class="btn btn-purple waves-effect waves-light" href="/"><i class="fa fa-angle-left"></i> 返回首页</a>
+   </div>
+</body>
+</html>
