@@ -68,6 +68,16 @@ public class UserServiceImpl implements UserService {
 		 
 	}
 	
+	public void  saveBatch(List<TUser> tUsers) {
+		
+		//LOGGER.info("tUser.username:={}", tUsers.getUsername());
+		 
+		
+		//tProjdigestMapper.insertSelective2(tProjdigest);
+		//tUserMapper.insert3(tUser);
+		 
+	}
+	
 	public void updateUser(TUser tUser) {
 		
 	    LOGGER.info("tUser.username:={}", tUser.getUsername());

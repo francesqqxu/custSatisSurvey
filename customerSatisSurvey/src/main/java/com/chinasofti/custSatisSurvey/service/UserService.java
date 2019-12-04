@@ -21,6 +21,8 @@ public interface UserService {
 	
 	public void delByIds(String[] ids);
 	
+	public void saveBatch(List<TUser> tUsers);
+	
 	public TUser custLogin(String password);
 	
 	public TUser login(String username,String password);

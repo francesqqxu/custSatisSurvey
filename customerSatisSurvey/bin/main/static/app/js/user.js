@@ -154,33 +154,6 @@
 })(jQuery);
  
 
-/*var $table = $('#userTbl').bootstrapTable({
-	  url: 'user/getUserList',
-	  toolbar: '.toolbar', //工具按钮用哪个容器
-      //striped: true, //是否显示行间隔色
-      cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-      pagination: true, //是否显示分页
-      sortable: true, //是否启用排序
-      sortOrder: "asc", //排序方式
-      //queryParams: postQueryParams,//传递参数（*）
-      //sidePagination: "server",      //分页方式：client客户端分页，server服务端分页（*）
-      pageSize: 10, //每页的记录行数（*）
-      pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
-      strictSearch: true,
-//  height: table_h, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度,设置了行高后编辑时标头宽度不会随着下面的行改变，且颜色也不会改变？？？？
-      uniqueId: "id", //每一行的唯一标识，一般为主键列
-      cardView: false, //是否显示详细视图
-      detailView: false, //是否显示父子表
-      paginationHAlign: "left",
-      singleSelect: true,
-      search: true,               //是否显示表格搜索，此搜索是客户端搜索，不会进服务端
-      //strictSearch: true,
-      showColumns: true, //是否显示所有的列
-      showRefresh: true, //是否显示刷新按钮
-      clickToSelect: true, //是否启用点击选中行
-      paginationPreText: "<<",
-      paginationNextText: ">>"
-}),*/
 var $modal = $('#userModal').modal({show: false}),
 $alert = $('.alert').hide();
 $alertModal = $modal.find('.alert');
@@ -255,13 +228,6 @@ $("#fm_user").bootstrapValidator({
                  }
             }
         },
-//        password: {
-//            validators: {
-//                 notEmpty: {
-//               	  message: "密码不能为空"
-//                 }
-//            }
-//        },
         evalPersonDep:{
         	validators: {
                 notEmpty: {
@@ -288,8 +254,8 @@ $(function(){
 	//console.log(window.parent.document.getElementById("login_name").innerText);
 	login_user = window.parent.document.getElementById("login_name").innerText;
 	//$('#usertype').selectpicker({width:120});
-	$('#surveytype').selectpicker({width:120});
-	$('#lob').selectpicker({width:120});
+	$('#surveytype').selectpicker();
+	//$('#lobtree').selectpicker({width:120});
 	
 //	initSelectOptions("surveytype","");
 //	initSelectOptions("usertype",login_user);
@@ -404,7 +370,8 @@ $(function(){
 		bootstrapValidator.updateStatus('evalPersonName', 'NOT_VALIDATED').validateField('evalPersonName'); 
 		initSelectOptions("surveytype","","");
 		//initSelectOptions("usertype",login_user);
-		initSelectOptions("lob",login_user,"false");
+		//initSelectOptions("lob",login_user,"false");
+		initTree(login_user,"false");
 	}); 
 	
 	$('.batchDel').click(function(){
@@ -492,8 +459,210 @@ $(function(){
 			});
 		 }	
 	});
+	
+	$('#frm_userImport').bootstrapValidator({
+        message: 'This value is not valid',
+        live: 'submitted',
+        fields: {/*验证*/
+            uploadFile: {
+                message: '导入文件无效',
+                validators: {
+                    notEmpty: {/*非空提示*/
+                        message: '导入文件不能为空'
+                    },
+                    regexp: {
+                        regexp: /\.xl(s[xmb]|t[xm]|am|s)$/,
+                        //regexp: /.xls$/,
+                       // extension: 'zip,rar,doc,docx,pdf',
+                        message: '导入文件类型必须是excel'
+                    }
+                   /* uploadFile: {
+                          extension: 'zip,rar,doc,docx,pdf',
+                          //  type:'zip,rar,doc,docx,pdf',
+                            maxSize: 1024*100,
+                            minSize: 1024,
+                            message: '仅支持大小在1M~5M之间,类型是zip,rar,doc,docx,pdf文件!'
+                    } */
+                }
+            }
+        }
+    });
+ 
+	 $("#uploadExcel").on("click","",function () {
+	        $('#frm_userImport').data("bootstrapValidator").validate();
+	        var flag = $('#frm_userImport').data("bootstrapValidator").isValid();
+	        alert(flag+"===========flag===========");
+	        if(!flag){
+	            //未通过验证
+	            return false;
+	        }
+	        var fileObj = document.getElementById("uploadFile").files[0];
+	        var formFile = new FormData();
+	        formFile.append("file", fileObj);
+	        var data = formFile;
+	        $.ajax({
+	            url: "user/upload",
+	            data: data,
+	            type: "Post",
+	            dataType: "json",
+	            cache: false,//上传文件无需缓存
+	            processData: false,//用于对data参数进行序列化处理 这里必须false
+	            contentType: false, //必须
+	            success: function (result) {
+	                console.log(JSON.stringify(result))
+	                var htmlstr = '';
+	                if(result.ajaxResultJson.success==false){
+	                    htmlstr = '<li>上传失败</li>';
+	                } else {
+	                    htmlstr = '<li>上传成功</li>';
+	                }
+	                $('#exportResult').html(htmlstr);
+	            },
+	            error: function(XMLHttpRequest, textStatus, errorThrown){
+	                layer.msg("系统错误",{icon: 2});
+	            }
+	        });
+	 });
     
 });
+
+function initTree(login_user,isAll){
+	 
+//	$('#lobtree').treeview({
+//		data: getTree(),//节点数据
+//		showBorder: true, //是否在节点周围显示边框
+//		showCheckbox: true, //是否在节点上显示复选框
+//		showIcon: true, //是否显示节点图标
+//		highlightSelected: true,
+//		levels: 2,
+//		multiSelect: true, //是否可以同时选择多个节点
+//		showTags: true
+//	});
+	
+	$.ajax({
+		type: 'post',
+		dataType: 'json',
+		url: '/config/tree/lob',
+		data:{
+	  		  loginUser: login_user,
+	  		  isAll: "false"
+	  	},
+		success: function(data){
+			 
+			   $('#lobtree').treeview({
+				  data: data,
+				  color: "#428bca",
+				  showBorder: true,
+				  showCheckbox: true,
+				  levels: 2,
+				  
+				  onNodeChecked: function(event,node){
+					  var selectNodes = getChildNodeIdArr(node);
+					  console.log(selectNodes);
+					  if(node.nodes){
+						  $('#lobtree').treeview('toggleNodeExpanded', [ node.nodeId, { silent: true } ]);
+					  }
+					  if (selectNodes) { //子节点不为空，则选中所有子节点
+					      $('#lobtree').treeview('checkNode', [selectNodes, { silent: true }]);
+					      $('#lob').attr("value",node.id);
+					      console.log($('#lob').val());
+				      }
+					  
+				  },
+				  onNodeUnchecked : function(event, node) { //取消选中节点
+					  var selectNodes = getChildNodeIdArr(node); //获取所有子节点
+					  if (selectNodes) { //子节点不为空，则取消选中所有子节点
+						  $('#lobtree').treeview('uncheckNode', [selectNodes, { silent: true }]);
+					  }
+				  },
+				  onNodeSeleted: function(event,node){
+					  console.log(JSON.stringify(node));
+					  alert(node.id + "," + node.text);
+				  },
+				  onNodeUnSelected: function(event,node){
+					  
+				  },
+				  onNodeClicked: function(event,data){
+					  alert(node.id + "," + node.text);
+				  }
+			   });
+			   $('#lobtree').treeview('collapseAll');
+			},
+			error: function(){
+				alert("load tree error");
+			}
+		     
+		});
+	
+} 
+
+function getChildNodeIdArr(node) {
+    var ts = [];
+    if (node.nodes) {
+        for (x in node.nodes) {
+            ts.push(node.nodes[x].nodeId);
+             if (node.nodes[x].nodes) {
+               var getNodeDieDai = getChildNodeIdArr(node.nodes[x]);
+               for (j in getNodeDieDai) {
+                    ts.push(getNodeDieDai[j]);
+               }
+            }
+        }
+    } else {
+        ts.push(node.nodeId);
+    }
+     return ts;
+  }
+
+function getTree() {
+	//节点上的数据遵循如下的格式：
+	var tree = [{
+		text: "Node 1", //节点显示的文本值	string
+		icon: "glyphicon glyphicon-play-circle", //节点上显示的图标，支持bootstrap的图标	string
+		selectedIcon: "glyphicon glyphicon-ok", //节点被选中时显示的图标		string
+		color: "#ff0000", //节点的前景色		string
+		backColor: "#1606ec", //节点的背景色		string
+		href: "#http://www.baidu.com", //节点上的超链接
+		selectable: true, //标记节点是否可以选择。false表示节点应该作为扩展标题，不会触发选择事件。	string
+		state: { //描述节点的初始状态	Object
+			checked: true, //是否选中节点
+			/*disabled: true,*/ //是否禁用节点
+			expanded: true, //是否展开节点
+			selected: true //是否选中节点
+		},
+		tags: ['标签信息1', '标签信息2'], //向节点的右侧添加附加信息（类似与boostrap的徽章）	Array of Strings
+		nodes: [{
+			text: "Child 1",
+			nodes: [{
+				text: "Grandchild 1"
+			}, {
+				text: "Grandchild 2"
+			}]
+		}, {
+			text: "Child 2"
+		}]
+	}, {
+		text: "Parent 2",
+		nodes: [{
+			text: "Child 2",
+			nodes: [{
+				text: "Grandchild 3"
+			}, {
+				text: "Grandchild 4"
+			}]
+		}, {
+			text: "Child 2"
+		}]
+	}, {
+		text: "Parent 3"
+	}, {
+		text: "Parent 4"
+	}, {
+		text: "Parent 5"
+	}];
+	
+	return tree;
+}
 
 function initSelectOptions(selectId,login_user,isAll){
 	
@@ -577,7 +746,9 @@ window.actionEvents = {
 			
 		}	     
 		 
-};
+}
+
+
  
 
 

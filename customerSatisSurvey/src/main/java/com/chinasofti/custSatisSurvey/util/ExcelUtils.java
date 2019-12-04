@@ -168,8 +168,8 @@ public class ExcelUtils {
         fillDataInCell(tSurvey.getSpecialEval71(),  sheet, 21,   3);
         fillDataInCell(tSurvey.getSpecialEval72(),  sheet, 22,   3);
         fillDataInCell(tSurvey.getSpecialEval7Detail(),  sheet, 21,   4);
-        fillDataInCell(tSurvey.getSpecialEval8(),  sheet, 23,   3);
-        fillDataInCell(tSurvey.getSpecialEval9(),  sheet, 24,   3);
+        fillDataInCell(tSurvey.getSpecialEval8(),  sheet, 23,   2);
+        fillDataInCell(tSurvey.getSpecialEval9(),  sheet, 24,   2);
          
     }
     
@@ -193,8 +193,8 @@ public class ExcelUtils {
          fillDataInCell(tSurvey.getSpecialEval41(),  sheet, 14,   3);
          fillDataInCell(tSurvey.getSpecialEval42(),  sheet, 15,   3);
          fillDataInCell(tSurvey.getSpecialEval4Detail(),  sheet, 14,   4);
-         fillDataInCell(tSurvey.getSpecialEval5(),  sheet, 16,   3);
-         fillDataInCell(tSurvey.getSpecialEval6(),  sheet, 17,   3);
+         fillDataInCell(tSurvey.getSpecialEval5(),  sheet, 16,   2);
+         fillDataInCell(tSurvey.getSpecialEval6(),  sheet, 17,   2);
          
         
     }
@@ -227,8 +227,8 @@ public class ExcelUtils {
          fillDataInCell(tSurvey.getSpecialEval43(),  sheet, 21,   3);
          fillDataInCell(tSurvey.getSpecialEval44(),  sheet, 22,   3);
          fillDataInCell(tSurvey.getSpecialEval4Detail(),  sheet, 19,   4);
-         fillDataInCell(tSurvey.getSpecialEval3(),  sheet, 23,   3);
-         fillDataInCell(tSurvey.getSpecialEval4(),  sheet, 24,   3);
+         fillDataInCell(tSurvey.getSpecialEval3(),  sheet, 23,   2);
+         fillDataInCell(tSurvey.getSpecialEval4(),  sheet, 24,   2);
         
     }
     
@@ -251,8 +251,8 @@ public class ExcelUtils {
          fillDataInCell(tSurvey.getSpecialEval3Detail(),  sheet, 12,   4);
          fillDataInCell(tSurvey.getSpecialEval41(),  sheet, 13,   3);
          fillDataInCell(tSurvey.getSpecialEval4Detail(),  sheet, 13,   4);
-         fillDataInCell(tSurvey.getSpecialEval3(),  sheet, 14,   3);
-         fillDataInCell(tSurvey.getSpecialEval4(),  sheet, 15,   3);
+         fillDataInCell(tSurvey.getSpecialEval3(),  sheet, 14,   2);
+         fillDataInCell(tSurvey.getSpecialEval4(),  sheet, 15,   2);
         
     }
   

@@ -8,5 +8,6 @@ import com.chinasofti.custSatisSurvey.pojo.TConfig;
 public interface ConfigService {
 	
 	public List<TConfig> selectBySelectId(String selectId,String loginUser,String isAll);
-
+   
+	public String selectLobByParentId(String loginUser, String isAll);
 }

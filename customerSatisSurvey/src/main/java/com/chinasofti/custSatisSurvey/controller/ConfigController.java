@@ -26,10 +26,22 @@ public class ConfigController {
 	
 	@RequestMapping("/{selectId}")
 	@ResponseBody
-	public JsonResult<TConfig> selectByParentId(@PathVariable("selectId") String selectId
+	public JsonResult<TConfig> selectBySelectId(@PathVariable("selectId") String selectId
 			, @RequestParam("loginUser") String loginUser, @RequestParam("isAll") String isAll) {
 		
 		return JsonResult.success(configService.selectBySelectId(selectId, loginUser,isAll));
 	}
+	
+	@RequestMapping("/tree/lob")
+	@ResponseBody
+	public String selectByParentId( @RequestParam("loginUser") String loginUser, @RequestParam("isAll") String isAll) {
+		
+		  return configService.selectLobByParentId(loginUser,isAll);
+	}
+	
+	
+	
+	
+	
 
 }
