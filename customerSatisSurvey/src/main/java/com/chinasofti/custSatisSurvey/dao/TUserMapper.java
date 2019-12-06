@@ -78,4 +78,8 @@ public interface TUserMapper {
 
 	//insert by selectKey(after)
 	int insert3(TUser record);
+	
+	int insertBatch(  List<TUser> list);
+	
+	int insertBatch2(  List<TUser> list);
 }

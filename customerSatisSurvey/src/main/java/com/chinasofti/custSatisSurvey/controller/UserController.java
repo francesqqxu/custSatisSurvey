@@ -35,6 +35,7 @@ import com.chinasofti.custSatisSurvey.controller.helper.ExceptionHelper;
 import com.chinasofti.custSatisSurvey.dto.JsonResult;
 import com.chinasofti.custSatisSurvey.dto.RestResponseBo;
 import com.chinasofti.custSatisSurvey.pojo.TSurvey;
+import com.chinasofti.custSatisSurvey.pojo.TTest;
 import com.chinasofti.custSatisSurvey.pojo.TUser;
 import com.chinasofti.custSatisSurvey.service.UserService;
 import com.chinasofti.custSatisSurvey.util.ShortUUIDUnique8Code;
@@ -266,7 +267,10 @@ public class UserController {
 	public Object upload(MultipartFile file) {
 	        
 		   String msg = "";
+		   String uniqueCode = "";
 	       List<TUser> userList = new ArrayList<TUser>();
+	       List<TTest>  testList = new ArrayList<TTest>();
+	       
 	       String fileName = file.getOriginalFilename();
 		       
 	 	   try {
@@ -279,20 +283,31 @@ public class UserController {
 	                // 获取多少行
 	                int rows = sheet.getPhysicalNumberOfRows();
 	                TUser tUser = null;
+	                TTest tTest = null;
+	                
 	                // 遍历每一行，注意：第 0 行为标题
 	                for (int j = 1; j < rows; j++) {
 	                     tUser = new TUser();
 	                    // 获得第 j 行
 	                    HSSFRow row = sheet.getRow(j);
+	                    uniqueCode = ShortUUIDUnique8Code.generateShortUuid();
+	  				    tUser.setUsername(uniqueCode);
+	  				    tUser.setPassword(uniqueCode);
+	  				    tUser.setUsertype("客户");
 	                    tUser.setCustname(row.getCell(0).toString());   	//客户名称
 	                    tUser.setLob(row.getCell(1).toString());         	//业务线
 	                    tUser.setSurveytype(row.getCell(2).toString());		//问卷类型
 	                    tUser.setEvalPersonDep(row.getCell(3).toString());	//客户评价人部门
 	                    tUser.setEvalPersonName(row.getCell(4).toString());	//客户评价人姓名
 	                    userList.add(tUser);
+	                    
+	                    tTest = new TTest();
+	                    tTest.setPassword(uniqueCode);
+	                    tTest.setUsername(uniqueCode);
+	                    testList.add(tTest);
 	                }
 	            }
-	            userService.saveBatch(userList);
+	            userService.insertBatchTest(testList);
 	        } catch (IOException e) {
 	        	return ExceptionHelper.handlerException(LOGGER, msg, e);
 	        }

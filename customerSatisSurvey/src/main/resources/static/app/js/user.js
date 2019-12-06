@@ -155,6 +155,7 @@
  
 
 var $modal = $('#userModal').modal({show: false}),
+$modalImport = $('#userImportModal').modal({show:false}),
 $alert = $('.alert').hide();
 $alertModal = $modal.find('.alert');
 
@@ -187,6 +188,13 @@ function showModal(title,row){
 	$modal.find('select[name="lob"]').val(row["lob"]).trigger("change");
 	$modal.find('select[name="surveytype"]').val(row["surveytype"]).trigger("change");
 	$modal.modal('show');
+}
+
+function showModalImport(title ){
+	 
+	$modalImport.find('.modal-title').text(title);
+	 
+	$modalImport.modal('show');
 }
 
 function showAlert(title,type){
@@ -460,6 +468,13 @@ $(function(){
 		 }	
 	});
 	
+	$('.importUser').click(function(){
+		
+		showModalImport($(this).text());
+		  
+	});
+	
+	
 	$('#frm_userImport').bootstrapValidator({
         message: 'This value is not valid',
         live: 'submitted',
@@ -489,6 +504,7 @@ $(function(){
     });
  
 	 $("#uploadExcel").on("click","",function () {
+		  
 	        $('#frm_userImport').data("bootstrapValidator").validate();
 	        var flag = $('#frm_userImport').data("bootstrapValidator").isValid();
 	        alert(flag+"===========flag===========");
@@ -503,15 +519,15 @@ $(function(){
 	        $.ajax({
 	            url: "user/upload",
 	            data: data,
-	            type: "Post",
+	            type: "POST",
 	            dataType: "json",
 	            cache: false,//上传文件无需缓存
 	            processData: false,//用于对data参数进行序列化处理 这里必须false
 	            contentType: false, //必须
 	            success: function (result) {
-	                console.log(JSON.stringify(result))
+	                //console.log(JSON.stringify(result))
 	                var htmlstr = '';
-	                if(result.ajaxResultJson.success==false){
+	                if(result.success==false){
 	                    htmlstr = '<li>上传失败</li>';
 	                } else {
 	                    htmlstr = '<li>上传成功</li>';
@@ -519,7 +535,7 @@ $(function(){
 	                $('#exportResult').html(htmlstr);
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown){
-	                layer.msg("系统错误",{icon: 2});
+	            	showAlertModal('系统错误!','danger');
 	            }
 	        });
 	 });

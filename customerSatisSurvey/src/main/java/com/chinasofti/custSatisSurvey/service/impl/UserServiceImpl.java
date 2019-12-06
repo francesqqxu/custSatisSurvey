@@ -3,13 +3,18 @@ package com.chinasofti.custSatisSurvey.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chinasofti.custSatisSurvey.Exception.TipException;
+import com.chinasofti.custSatisSurvey.dao.TTestMapper;
 import com.chinasofti.custSatisSurvey.dao.TUserMapper;
+import com.chinasofti.custSatisSurvey.pojo.TTest;
 import com.chinasofti.custSatisSurvey.pojo.TUser;
 import com.chinasofti.custSatisSurvey.pojo.TUserExample;
 import com.chinasofti.custSatisSurvey.service.UserService;
@@ -24,6 +29,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	TUserMapper tUserMapper;
+	
+	@Autowired
+	TTestMapper tTestMapper;
+	
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;
 	
 	public List<TUser>getUserList(){
 		
@@ -68,16 +79,77 @@ public class UserServiceImpl implements UserService {
 		 
 	}
 	
-	public void  saveBatch(List<TUser> tUsers) {
+	public void  insertBatch(List<TUser> list) {
 		
 		//LOGGER.info("tUser.username:={}", tUsers.getUsername());
-		 
+		
 		
 		//tProjdigestMapper.insertSelective2(tProjdigest);
 		//tUserMapper.insert3(tUser);
+	    LOGGER.info("List<TUser> size  {}", list.size());
+//	    TUser tUser;
+//	    
+//	    SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
+//	    
+//	    TUserMapper tUserMapper= sqlSession.getMapper(TUserMapper.class);
+//	    for(int i=0; i<list.size(); i++) {
+//	    	tUser = new TUser();
+//	    	tUser.setUsername(((TUser)list.get(i)).getUsername());
+//	    	tUser.setPassword(((TUser)list.get(i)).getPassword());
+//	    	tUserMapper.insert3(tUser);
+//	    }
+//	    sqlSession.commit();
+	    
+	    SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
+	    
+	    try {
+	    	TUserMapper  mapper = sqlSession.getMapper(com.chinasofti.custSatisSurvey.dao.TUserMapper.class);
+	    	
+	    	mapper.insertBatch2(list);
+	    	//sqlSession.insert("com.chinasofti.custSatisSurvey.dao.TUserMapper.insertBatch",list);
+	    	sqlSession.commit();
+	    }finally {
+	    	sqlSession.close();
+	    }
+	    
+		//tUserMapper.insertBatch(list);
 		 
 	}
 	
+
+	
+	@Override
+	public void insertBatchTest(List<TTest> list) {
+		
+			    LOGGER.info("List<TTest> size  {}", list.size());
+//			    TUser tUser;
+//			    
+//			    SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
+//			    
+//			    TUserMapper tUserMapper= sqlSession.getMapper(TUserMapper.class);
+//			    for(int i=0; i<list.size(); i++) {
+//			    	tUser = new TUser();
+//			    	tUser.setUsername(((TUser)list.get(i)).getUsername());
+//			    	tUser.setPassword(((TUser)list.get(i)).getPassword());
+//			    	tUserMapper.insert3(tUser);
+//			    }
+//			    sqlSession.commit();
+			    
+			    SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH,false);
+			    
+			    try {
+			    	TTestMapper  mapper = sqlSession.getMapper(com.chinasofti.custSatisSurvey.dao.TTestMapper.class);
+			    	
+			    	mapper.insertBatch2(list);
+			    	//sqlSession.insert("com.chinasofti.custSatisSurvey.dao.TUserMapper.insertBatch",list);
+			    	sqlSession.commit();
+			    }finally {
+			    	sqlSession.close();
+			    }
+			    
+				//tUserMapper.insertBatch(list);
+}
+
 	public void updateUser(TUser tUser) {
 		
 	    LOGGER.info("tUser.username:={}", tUser.getUsername());

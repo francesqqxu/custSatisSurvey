@@ -365,4 +365,39 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
   </insert>
+  
+  <insert id="insertBatch" keyColumn="id" keyProperty="id" parameterType="java.util.List" useGeneratedKeys="true">
+ 	
+ 	insert into  t_user (username, password)  values 
+ 	<foreach collection="list" index="index" item="user" separator=","> 
+ 	 ( #{user.username}, #{user.password}) 
+    </foreach>
+
+  </insert>
+
+   <insert id="insertBatch2" keyColumn="id" keyProperty="id" parameterType="java.util.List" useGeneratedKeys="true">
+ 	
+ 	<foreach collection="list" index="index" item="user" separator=";"> 
+	 	insert into  t_user (username, password)  
+	 	values
+	 	( #{user.username}, #{user.password}) 
+    </foreach>
+
+  </insert>
+
+<!--   &lt;insert id="insertBatch" parameterType="com.chinasofti.custSatisSurvey.pojo.TUser"  &gt; -->
+ 	
+<!--  	&lt;selectKey resultType ="java.lang.Integer" keyProperty= "id" -->
+<!--                   order= "AFTER"&gt; -->
+<!--                  SELECT LAST_INSERT_ID() -->
+<!--     &lt;/selectKey&gt; -->
+<!--  	insert into  t_user (username, password)  values -->
+<!--  	 &lt;foreach collection ="list" item="user" separator =","&gt;  -->
+<!--  	 ( #{user.username}, #{user.password})  -->
+<!--  	&lt;/foreach&gt; -->
+
+<!--   &lt;/insert&gt; -->
+
+
+  
 </mapper>

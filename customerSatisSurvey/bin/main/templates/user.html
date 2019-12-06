@@ -149,14 +149,18 @@
   	</div><!-- /.modal -->
    
    
-    <div class="row">
-    <div class="col-md-12">
-        <section class="panel">
-            <header class="panel-heading">
-                	用户模板导入
-            </header>
-                <div class="modal-body">
-                    <div class="row">
+    
+    <div id="userImportModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">  
+    	<div class="modal-dialog">      
+             <div class="modal-content">
+	             <div class="modal-header">
+	  	              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	  	                 <span aria-hidden="true">x</span>
+	 	              </button>
+	 	              <h4 class="modal-title"></h4>
+	  	         </div>
+                 <div class="modal-body">
+                     <div class="row">
                         <div class="col-md-12">
                             <form id="frm_userImport" method="" class="form-horizontal" action="">
                                 <div class="col-md-12">
@@ -179,11 +183,10 @@
                     </div>
                 </div>
                     
-        </section>
+        
+ 			</div>
+    	</div>
     </div>
-</div>
-
-  
 
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="../static/plugins/bootstrap/js/jquery.min.js"  th:src="@{/plugins/bootstrap/js/jquery.min.js}" type="text/javascript"></script>
