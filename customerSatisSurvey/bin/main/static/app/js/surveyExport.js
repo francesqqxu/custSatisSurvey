@@ -72,14 +72,24 @@ $(function(){
                         message: '请选择结束时间'
                     },
                     callback: {
-                        message: '开始时间必须小于结束时间',
+                        message: '开始日期必须小于结束日期, 结束日期不能大于当日日期',
                         callback: function (value, validator, $field) {
                             let other = validator.getFieldElements('evalBegDate').val();//获得另一个的值
- 
+                            console.log("value", value);
+                            console.log("other",value);
+                            let curDate = new Date();
+                            
                             let start = new Date(other.replace("-", "/").replace("-", "/"));
                             let end = new Date(value.replace("-", "/").replace("-", "/"));
- 
+                            console.log("start",start);
+                            console.log("end",end);
+                            console.log("now", new Date());
+                            if(end > curDate){ 
+                            	console.log("end greater then current");
+                            	return false;
+                            }
                             if (start <= end) {
+                            	console.log("start is less then end");
                                 return true;
                             }
                             return false;
@@ -91,7 +101,19 @@ $(function(){
         }
     });
  
-
+	function formatDate(date) { 
+		var myyear = date.getFullYear(); 
+		var mymonth = date.getMonth()+1; 
+		var myweekday = date.getDate(); 
+		if(mymonth < 10){ 
+		mymonth = "0" + mymonth; 
+		} 
+		if(myweekday < 10){ 
+		myweekday = "0" + myweekday; 
+		} 
+		return (myyear+"/"+mymonth + "/" + myweekday); 
+	}  
+	 
 	
  	//$modal.find('.submit').click(function(){
     $('#btnSurveyExport').click(function(){ 
